@@ -1,4 +1,4 @@
-package br.uff.descarte.descarte_bem
+package br.uff.descarte_bem
 
 import io.flutter.embedding.android.FlutterActivity
 
