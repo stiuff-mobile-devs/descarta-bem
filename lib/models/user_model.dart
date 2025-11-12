@@ -1,5 +1,5 @@
 class User {
-  String id; // uid
+  String id;
   String email;
   String name;
   DateTime createdAt;

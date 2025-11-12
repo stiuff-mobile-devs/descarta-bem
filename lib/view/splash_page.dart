@@ -1,8 +1,10 @@
 import 'package:descarte_bem/utils/widgets/loading_widget.dart';
+import 'package:descarte_bem/view/map_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controllers/user_controller.dart';
 import 'login_page.dart';
+import '../controllers/map_controller.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -42,9 +44,13 @@ class _SplashPageState extends State<SplashPage> {
       return LoginPage();
     }
 
-    return Text(
-      "Logado",
-      style: const TextStyle(fontSize: 18),
+    return ChangeNotifierProvider(
+      create: (context) => MapController(),
+      child: Consumer<MapController>(
+        builder: (context, controller, _) {
+          return MapPage(controller: controller);
+        },
+      )
     );
   }
 }
