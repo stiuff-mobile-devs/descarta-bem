@@ -4,11 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Pharmacy {
   String id;
   String name;
+  String address;
   LatLng position;
 
   Pharmacy({
     required this.id,
     required this.name,
+    required this.address,
     required this.position
   });
 
@@ -18,6 +20,7 @@ class Pharmacy {
     return Pharmacy(
       id: id,
       name: data["nome"],
+      address: data["endereco"] ?? "",
       position: LatLng(geoPoint.latitude, geoPoint.longitude)
     );
   }

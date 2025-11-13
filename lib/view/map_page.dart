@@ -4,7 +4,6 @@ import 'package:latlong2/latlong.dart';
 import 'package:descarte_bem/controllers/map_controller.dart' as mc;
 import 'package:provider/provider.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
-
 import '../controllers/user_controller.dart';
 
 class MapPage extends StatefulWidget {
@@ -48,7 +47,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
         backgroundColor: const Color.fromRGBO(43, 75, 140, 1),
         elevation: 0,
         toolbarHeight: 60,
-        title: const Text("Descarte Bem", style: TextStyle(color: Colors.white)),
+        title: const Text("Descarta Bem", style: TextStyle(color: Colors.white)),
         titleTextStyle: const TextStyle(color: Colors.black54, fontWeight: FontWeight.w400, fontSize: 22),
         centerTitle: true,
         actions: [
@@ -115,7 +114,8 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
             p.position.latitude,
             p.position.longitude,
             p.name,
-            context
+            context,
+            p.address
           )
         );
       }
@@ -123,7 +123,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   }
 
   Marker customMarker(int distance,
-      double lat, double long, String nome, BuildContext context) {
+      double lat, double long, String nome, BuildContext context, String address) {
     return Marker(
       point: LatLng(lat, long),
       width: 80,
@@ -134,13 +134,12 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
           padding: const EdgeInsets.all(50),
           icon: const Icon(Icons.medication_rounded, color: Colors.red),
           onPressed: () {
-            debugPrint("AAAAAaaaAAAA");
             showDialog(
               context: context,
               builder: (context) {
                 return AlertDialog(
                   title: Text(
-                    '$nome \n${distance}m',
+                    '$nome \n$address \n${distance}m',
                     textAlign: TextAlign.center,
                   ),
                 );

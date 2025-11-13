@@ -63,7 +63,7 @@ class _FAQPageState extends State<FAQPage> {
           return Padding(
             padding: EdgeInsets.only(top: hei/75, bottom: hei/75),
             child: ExpansionTile(
-              textColor: Colors.white,
+              textColor: const Color.fromRGBO(43, 75, 140, 1),
               collapsedBackgroundColor: Colors.white,
               backgroundColor: Colors.teal.shade100,
               title: Text(
