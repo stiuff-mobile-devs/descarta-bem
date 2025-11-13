@@ -6,6 +6,7 @@ class UserController extends ChangeNotifier {
   final SignInService _signInService;
 
   User? currentUser;
+  String? profileImageUrl;
   bool isSignedIn = false;
   bool loading = true;
 
@@ -55,5 +56,6 @@ class UserController extends ChangeNotifier {
 
     User user = User(id: uid, email: email!, name: googleName!);
     currentUser = user;
+    profileImageUrl = authUser?.photoURL;
   }
 }

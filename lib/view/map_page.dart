@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:descarte_bem/controllers/map_controller.dart' as mc;
+import 'package:provider/provider.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
+
+import '../controllers/user_controller.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key, required this.controller});
@@ -27,18 +30,21 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     if (widget.controller.loading) {
-      return const Center(child: CircularProgressIndicator());
+      return Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(child: CircularProgressIndicator()),
+      );
     }
     _getMarkersList(context);
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(
-        //   icon: Icon(Icons.arrow_back),
-        //   color: Colors.grey.shade700,
-        //   onPressed: () {
-        //     Navigator.pop(context);
-        //   },
-        // ),
+        leading:IconButton(
+          icon: Icon(Icons.logout),
+          color: Colors.white,
+          onPressed: () {
+            context.read<UserController>().logout();
+          },
+        ),
         backgroundColor: const Color.fromRGBO(43, 75, 140, 1),
         elevation: 0,
         toolbarHeight: 60,

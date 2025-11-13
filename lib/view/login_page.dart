@@ -12,12 +12,23 @@ class LoginPage extends StatelessWidget {
 
     return Scaffold(
       body: Center(
-        child: SignInButton(
-          buttonType: ButtonType.googleDark,
-          btnText: "Entrar com o Google",
-          onPressed: () {
-            userController.login();
-          },
+        child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+            Image.asset(
+              'assets/logo.png',
+              width: 150,
+              height: 150,
+            ),
+            const SizedBox(height: 40),
+            SignInButton(
+              buttonType: ButtonType.googleDark,
+              btnText: "Entrar com o Google",
+              onPressed: () {
+                userController.login();
+              },
+            ),
+          ],
         ),
       ),
     );
