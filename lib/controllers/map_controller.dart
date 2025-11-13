@@ -9,13 +9,17 @@ class MapController extends ChangeNotifier {
 
   LatLng? position;
   List<Pharmacy> pharmacies = [];
+  bool loading = true;
 
   MapController() {
+    _initialize();
   }
 
-  init() async {
+  _initialize() async {
     await _getCurrentLocation();
     await _getPharmaciesList();
+    loading = false;
+    notifyListeners();
   }
 
    _getCurrentLocation() async {
@@ -30,24 +34,19 @@ class MapController extends ChangeNotifier {
      if (permission == LocationPermission.denied) {
        permission = await Geolocator.requestPermission();
        if (permission == LocationPermission.denied) {
-         return Future.error('Location permissions are denied');
+         return;
        }
      }
      if (permission == LocationPermission.deniedForever) {
-       return Future.error(
-           'Location permissions are permanently denied, we cannot request permissions.');
+       return;
      }
 
      Position pos = await Geolocator.getCurrentPosition();
-     double latitude = pos.latitude;
-     double longitude = pos.longitude;
-     position = LatLng(latitude, longitude);
-     notifyListeners();
+     position = LatLng(pos.latitude, pos.longitude);
    }
 
    _getPharmaciesList() async {
      pharmacies = await repository.getAll();
-     notifyListeners();
    }
 
   double getDistance(Pharmacy pharmacy) {
